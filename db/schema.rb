@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227142036) do
+ActiveRecord::Schema.define(version: 20170103003202) do
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "player_home_id"
-    t.integer  "player_away_id"
-    t.boolean  "verified",       default: false
+    t.boolean  "verified",        default: false
     t.integer  "score_home"
     t.integer  "score_away"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "opposing_player"
+    t.integer  "user_id"
+    t.string   "proof_url"
+    t.index ["user_id"], name: "index_games_on_user_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -50,4 +52,5 @@ ActiveRecord::Schema.define(version: 20161227142036) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "games", "users"
 end

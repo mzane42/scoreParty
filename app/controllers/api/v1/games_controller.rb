@@ -14,8 +14,18 @@ class Api::V1::GamesController < ApplicationController
   end
 
   # POST /games
+  # Access Key ID:
+  #AKIAIVZPLKLGULYSBDAA
+  #Secret Access Key:
+   #                 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
   def create
-    @game = Game.new(game_params)
+    proof = params[:game][:proof_file][:data] if params[:game][:proof_file]
+    destination = GlobalHelper::upload_to_s3_from_base64(proof)
+    proof_url = GlobalHelper::get_s3_url(destination)
+    if proof_url.present?
+      verified = true
+    end
+    @game = Game.new(game_params.merge(proof_url: proof_url, verified: verified ))
 
     if @game.save
       render json: @game, status: :created
@@ -46,7 +56,7 @@ class Api::V1::GamesController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params.fetch(:game, {}).permit(:player_home_id, :player_away_id, :verified, :score_home, :score_away)
+      params.fetch(:game, {}).permit(:opposing_player, :verified, :score_home, :score_away).merge(user_id: current_user.id)
     end
 =begin
   def game_params

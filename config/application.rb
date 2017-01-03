@@ -15,6 +15,8 @@ require 'rack/cors'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
+require 'openssl'
+OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
 Bundler.require(*Rails.groups)
 
 module ScoreParty
@@ -26,9 +28,11 @@ module ScoreParty
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
+
     #config.api_only = true
     #config.middleware.insert_after(ActiveRecord::QueryCache, ActionDispatch::Cookies)
     #config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
+    #add rack cors
     #add rack cors
     config.middleware.use Rack::Cors do
       allow do

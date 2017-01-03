@@ -33,3 +33,4 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'omniauth-facebook'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', '~> 1.2016', '>= 1.2016.10', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'aws-sdk', '~> 2'
