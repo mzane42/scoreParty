@@ -1,9 +1,20 @@
 require 'base64'
 require 'securerandom'
 require 'aws-sdk'
+require 'net/http'
+require 'uri'
+require 'json'
 
 
 module GlobalHelper
+
+  ################## Facebook Graph Api ####################
+
+  def self.get_facebook_friends(access_token)
+    user_friends = URI.parse('https://graph.facebook.com/me/friends?&access_token=' + access_token.to_s)
+    friends_response = Net::HTTP.get_response(user_friends)
+    friends = JSON.parse(friends_response.body)
+  end
 
   ################## Amazon web service ####################
 

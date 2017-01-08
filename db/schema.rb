@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170106184534) do
+ActiveRecord::Schema.define(version: 20170108192102) do
+
+  create_table "friends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "uid"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "friend_id"
+    t.index ["user_id"], name: "index_friends_on_user_id", using: :btree
+  end
 
   create_table "game_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -62,6 +72,7 @@ ActiveRecord::Schema.define(version: 20170106184534) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "friends", "users"
   add_foreign_key "games", "game_types"
   add_foreign_key "games", "users"
 end

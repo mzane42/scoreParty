@@ -5,10 +5,23 @@ class Api::V1::GamesController < ApplicationController
   # GET /games
   def index
     #@games = Game.where(user_id: current_user.id).all.order(created_at: :desc)
-    @games = Game.select('games.*, sum(games.score_home - games.score_away) as diff_score').group(:id).all.order('created_at DESC')
+    @games = Game.select('games.*, sum(games.score_home - games.score_away) as diff_score').group(:id).where(user_id: current_user.id).all.order('created_at DESC')
     render json: @games.to_json(:include => [:user, :game_type])
   end
 
+  # Dirty codes ...
+  def friend_game
+    friend_ids = []
+    # Controller action should call one model method other an initial find.
+    friends = Friend.where(user_id: current_user.id).all
+    friends.each_with_index do |friend, i|
+      friend_ids[i] = friend.friend_id
+    end
+    @games = Game.select('games.*, sum(games.score_home - games.score_away) as diff_score').group(:id).where(user_id: friend_ids).all.order('created_at DESC')
+    render json: @games.to_json(:include => [:user, :game_type])
+  end
+
+  # End Dirty codes ...
   # GET /games/1
   def show
     render json: @game

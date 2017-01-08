@@ -45,6 +45,6 @@ class Api::V1::GameTypesController < ApplicationController
     end
 
   def game_type_params
-    params.fetch(:type_game, {}).permit(:name, :url_img, :score_home, :score_away).merge(user_id: current_user.id)
+    params.fetch(:type_game, {}).permit(:name)
   end
 end
