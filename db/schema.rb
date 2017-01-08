@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170103003202) do
+ActiveRecord::Schema.define(version: 20170106184534) do
+
+  create_table "game_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name"
+    t.string   "url_img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "games", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.boolean  "verified",        default: false
@@ -21,6 +28,9 @@ ActiveRecord::Schema.define(version: 20170103003202) do
     t.string   "opposing_player"
     t.integer  "user_id"
     t.string   "proof_url"
+    t.string   "description"
+    t.integer  "game_type_id"
+    t.index ["game_type_id"], name: "index_games_on_game_type_id", using: :btree
     t.index ["user_id"], name: "index_games_on_user_id", using: :btree
   end
 
@@ -52,5 +62,6 @@ ActiveRecord::Schema.define(version: 20170103003202) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "games", "game_types"
   add_foreign_key "games", "users"
 end
