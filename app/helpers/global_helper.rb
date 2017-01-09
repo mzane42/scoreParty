@@ -58,7 +58,7 @@ module GlobalHelper
     return destination
   end
 
-  # configure_client (DANGEROUS !!!! NEVER SAVE credentials in a committed file but .... it's just an exercise ...)
+  # configure_client (DANGEROUS !!!! NEVER SAVE credentials in a committed file)
   def self.configure_client
     Aws.config.update({
                           region: 'eu-west-2',
