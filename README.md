@@ -1,8 +1,8 @@
 # ScoreParty Api
 
-Simple APi project to save score with friends connected with [scoreParty-angular](https://github.com/mzane42/scoreParty-angular)  including :
+Simple APi project to save your video games score connected with [scoreParty-angular](https://github.com/mzane42/scoreParty-angular)  the project include :
 * Oauth2 authentication via Facebook.
-* CRUD to save games
+* CRUD to save score games
 * Get friends Facebook 
 * etc ...
 
@@ -37,7 +37,7 @@ Then, run migration :
 rake db:migration
 ~~~
 
-Finally, seed the database with list of games added (Fifa, StreetFighter, Hearthstone etc...)  :
+Finally, seed the database with video games (Fifa, StreetFighter, Hearthstone etc...)  :
 
 ~~~bash
 rake db:seed
