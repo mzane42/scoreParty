@@ -1,10 +1,11 @@
 # ScoreParty Api
 
-Simple APi project to save your video games score connected with [scoreParty-angular](https://github.com/mzane42/scoreParty-angular)  the project include :
+Simple APi project to save video game scores and share it with your facebook friends connected with the client side [scoreParty-angular](https://github.com/mzane42/scoreParty-angular) the project include :
 * Oauth2 authentication via Facebook.
 * CRUD to save score games
 * Get friends Facebook 
 * etc ...
+
 
 ## Getting Started
 
