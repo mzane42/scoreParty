@@ -22,22 +22,26 @@ module Overrides
         fb_token = @_auth_hash[:credentials][:token]
         @facebook = GlobalHelper::get_facebook_friends(fb_token)
         user = User.find_by(uid: @resource.uid)
-        if user.friends.size < @facebook['data'].size
-          buddy = Friend.where(:uid => @facebook['id'], :user_id => user.id).first
-          if buddy.blank?
-            @facebook['data'].each do |friend|
+        if user.present? && @facebook.present? && user.friends.size < @facebook['data'].size
+          @facebook['data'].each do |friend|
+            buddy = Friend.where(:uid => friend['id'], :user_id => user.id).first
+            if buddy.blank?
               f = User.find_by(uid: friend['id'])
-              friend = Friend.new(uid: friend['id'], name: friend['name'], 	friend_id: 	f.id, user_id: user.id)
-              friend.save
+              if f.present?
+                friend = Friend.new(uid: friend['id'], name: friend['name'], 	friend_id: 	f.id, user_id: user.id)
+                friend.save
+              end
             end
           end
         end
       end
+
       # ***** end terrible code ****
       yield @resource if block_given?
 
       render_data_or_redirect('deliverCredentials', @auth_params.as_json, @resource.as_json)
-    end
 
+    end
   end
 end
+
