@@ -1,24 +1,61 @@
-# README
+# ScoreParty Api
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple APi project to save score with friends connected with [scoreParty-angular](https://github.com/mzane42/scoreParty-angular)  including :
+* Oauth2 authentication via Facebook.
+* CRUD to save games
+* Get friends Facebook 
+* etc ...
 
-Things you may want to cover:
+## Getting Started
 
-* Ruby version
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-* System dependencies
+### Prerequisites
 
-* Configuration
+* Ruby 2.2.6 or newer
+* Rails 4.2 or newer
 
-* Database creation
+### Installing
 
-* Database initialization
+A step by step series of examples that tell you have to get a development env running
 
-* How to run the test suite
+First, install gems required with : 
 
-* Services (job queues, cache servers, search engines, etc.)
+~~~bash
+bundle install
+~~~
 
-* Deployment instructions
+Then, create the database :
 
-* ...
+~~~bash
+rake db:create
+~~~
+
+Then, run migration :
+
+~~~bash
+rake db:migration
+~~~
+
+Finally, seed the database with list of games added (Fifa, StreetFighter, Hearthstone etc...)  :
+
+~~~bash
+rake db:seed
+~~~
+
+
+## Running the server :
+**Note:** the client side will run on port 3000
+
+~~~bash
+rails server -p 3001
+~~~
+
+
+## Client side :
+
+Go to [scoreParty-angular](https://github.com/mzane42/scoreParty-angular) to install the client.
+
+## Author
+
+* **Zane Anis** - [mzane42](https://github.com/mzane42)
