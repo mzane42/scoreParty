@@ -15,7 +15,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Ruby 2.2.6 or newer
 * Rails 4.2 or newer
-* Mysql
+* Mysql (don't forget to start the server _mysql.server start_)
 
 ### Installing
 
